@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from spinal import SpinalController
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # This enables CORS for all routes
 
 controller = SpinalController()
 
