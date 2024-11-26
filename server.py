@@ -15,7 +15,7 @@ def message():
     data = request.get_json()
     if 'messages' in data:
         messages = data['messages']
-        tools = data['tools'] if 'tools' in data else []
+        tools = data['tools'] if 'tools' in data else None
         responseMessage = controller.handle(messages, tools)
         return jsonify({'message': responseMessage}), 200
     else:
