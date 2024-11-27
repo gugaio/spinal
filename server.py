@@ -10,6 +10,10 @@ CORS(app)  # This enables CORS for all routes
 
 controller = SpinalController()
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'message': 'Pong!'}), 200
+
 @app.route('/message', methods=['POST'])
 def message():
     data = request.get_json()
@@ -22,4 +26,4 @@ def message():
         return jsonify({'error': 'No message attribute found'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=False)
