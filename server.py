@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from spinal import SpinalController
 from dotenv import load_dotenv
 from flask_cors import CORS
+import os
 
 load_dotenv()
 
@@ -26,4 +27,5 @@ def message():
         return jsonify({'error': 'No message attribute found'}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False)
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
