@@ -7,13 +7,12 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)  # Enable CORS for all routes and support credentials
+CORS(app)  # Enable CORS for all routes and support credentials
 
 controller = SpinalController()
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return jsonify({'message': 'Pong!'}), 200
 
 @app.route('/message', methods=['POST'])
@@ -23,7 +22,6 @@ def message():
         messages = data['messages']
         tools = data['tools'] if 'tools' in data else None
         responseMessage = controller.handle(messages, tools)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return jsonify({'message': responseMessage}), 200
     else:
         return jsonify({'error': 'No message attribute found'}), 400
